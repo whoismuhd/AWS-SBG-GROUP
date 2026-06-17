@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Student Builder Group NTU | Core Team Application</title>
+    <meta name="description" content="Apply to join the founding core team of the AWS Student Builder Group at Nottingham Trent University.">
+    <style>
+        :root {
+            --bg-1: #ffd0e2;       /* page background, pink */
+            --bg-2: #ffe9f1;
+            --bg-3: #fff5f9;
+            --header-1: #ffc0d8;   /* header gradient, light pink */
+            --header-2: #ffdbe9;
+            --pink: #ec4899;       /* bright accent: focus rings, active borders */
+            --pink-deep: #be185d;  /* call to action and links */
+            --pink-darker: #9d174d;/* button hover */
+            --soft: #fff5f9;       /* tints and hovers */
+            --ink: #4a2233;        /* headings and body text */
+            --plum: #5a2742;       /* strong headings */
+            --muted: #8a6275;      /* secondary text */
+            --line: #f1d3df;       /* borders */
+            --err: #d6332f;
+            color-scheme: light;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-3) 100%);
+            min-height: 100vh;
+            padding: 24px;
+            color: var(--ink);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 24px 60px rgba(190, 24, 93, 0.18);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--header-1) 0%, var(--header-2) 100%);
+            padding: 40px 32px 32px;
+            text-align: center;
+            color: var(--ink);
+        }
+
+        .header h1 { font-size: 26px; letter-spacing: 0.2px; color: var(--plum); }
+        .header p { color: var(--muted); font-size: 15px; margin-top: 8px; }
+
+        .aws-badge {
+            display: inline-block;
+            background: #ffffff;
+            color: var(--pink-deep);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 16px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(190, 24, 93, 0.15);
+        }
+
+        .form-container { padding: 32px; }
+
+        .info-text {
+            background: var(--soft);
+            border-left: 4px solid var(--pink);
+            padding: 16px 18px;
+            border-radius: 10px;
+            margin-bottom: 28px;
+            font-size: 14px;
+            color: #8a3a63;
+            line-height: 1.55;
+        }
+
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            font-weight: 700;
+            margin: 32px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .section-title:first-of-type { margin-top: 0; }
+
+        .form-group { margin-bottom: 22px; }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 14.5px;
+        }
+
+        .hint { font-weight: 400; color: var(--muted); font-size: 13px; margin-top: 2px; }
+        .required { color: var(--err); margin-left: 3px; }
+
+        input[type="text"], input[type="email"], input[type="tel"],
+        input[type="url"], textarea, select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #fff;
+            color: var(--ink);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--pink);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+        }
+
+        textarea { resize: vertical; min-height: 108px; line-height: 1.5; }
+
+        .role-grid { margin-top: 6px; }
+
+        .role-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px 14px;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .role-item:hover { border-color: var(--pink); background: var(--soft); }
+
+        .role-item input[type="checkbox"] {
+            width: 19px; height: 19px;
+            margin-top: 2px;
+            accent-color: var(--pink);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .role-item .role-text { font-size: 14.5px; line-height: 1.45; }
+        .role-item .role-text strong { display: block; color: var(--ink); }
+        .role-item .role-text span { color: var(--muted); font-size: 13px; }
+
+        .consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+        .consent input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--pink); flex-shrink: 0; }
+
+        .submit-btn {
+            background: var(--pink-deep);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 14px;
+            letter-spacing: 0.3px;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+            box-shadow: 0 8px 20px rgba(190, 24, 93, 0.3);
+        }
+        .submit-btn:hover { background: var(--pink-darker); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(190, 24, 93, 0.4); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .success-message, .error-banner {
+            display: none;
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .success-message { background: var(--soft); border: 1px solid var(--pink); color: #7a2348; }
+        .success-message h3 { font-size: 18px; margin-bottom: 6px; color: var(--plum); }
+        .error-banner { background: #fdecec; border: 1px solid var(--err); color: #7a1714; font-size: 14px; }
+
+        .footer-note { text-align: center; font-size: 12px; color: var(--muted); padding: 0 32px 28px; }
+        .footer-note a { color: var(--pink-deep); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            .header { padding: 32px 22px 26px; }
+            .header h1 { font-size: 22px; }
+            .form-container { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- EDIT: group name, university, and intro text below -->
+        <div class="header">
+            <h1>AWS Student Builder Group</h1>
+            <p>Nottingham Trent University &middot; Core Team Application</p>
+            <div class="aws-badge">Powered by AWS</div>
+        </div>
+
+        <div class="form-container">
+            <div class="info-text">
+                We are building the founding core team for the AWS Student Builder Group at NTU: a student led community for cloud and AWS. Fill in the form below to apply. We read every application and will be in touch. No prior AWS experience is needed for the non technical roles, and students from any course and any year are welcome.
+            </div>
+
+            <form id="application-form" novalidate>
+                <div class="section-title">About you</div>
+
+                <div class="form-group">
+                    <label>Full name <span class="required">*</span></label>
+                    <input type="text" name="fullName" required placeholder="e.g. Jordan Smith">
+                </div>
+
+                <div class="form-group">
+                    <label>NTU student email <span class="required">*</span></label>
+                    <input type="email" name="email" required placeholder="e.g. n0123456@my.ntu.ac.uk">
+                </div>
+
+                <div class="form-group">
+                    <label>Course and year of study <span class="required">*</span></label>
+                    <input type="text" name="course" required placeholder="e.g. BSc Computer Science, Year 2">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone or WhatsApp <span class="hint">(optional)</span></label>
+                    <input type="tel" name="phone" placeholder="e.g. 07xxx xxxxxx">
+                </div>
+
+                <div class="form-group">
+                    <label>LinkedIn profile <span class="required">*</span></label>
+                    <input type="url" name="linkedin" required placeholder="https://linkedin.com/in/username">
+                </div>
+
+                <div class="form-group">
+                    <label>GitHub or portfolio <span class="hint">(optional)</span></label>
+                    <input type="url" name="github" placeholder="https://github.com/username">
+                </div>
+
+                <div class="section-title">The role</div>
+
+                <div class="form-group">
+                    <label>Which role or roles are you applying for? <span class="required">*</span></label>
+                    <div class="hint" style="margin-bottom:10px;">Select all that apply.</div>
+                    <div class="role-grid">
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Vice Lead">
+                            <span class="role-text"><strong>Vice Lead</strong><span>Supports the leader, coordinates the team, and deputises when needed.</span></span>
+                        </label>
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Events &amp; Operations">
+                            <span class="role-text"><strong>Events &amp; Operations</strong><span>Plans and runs workshops, study jams, talks, and socials, plus the logistics.</span></span>
+                        </label>
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Marketing &amp; Social Media">
+                            <span class="role-text"><strong>Marketing &amp; Social Media</strong><span>Runs the social channels, promotion, and announcements, and grows membership.</span></span>
+                        </label>
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Design &amp; Creative">
+                            <span class="role-text"><strong>Design &amp; Creative</strong><span>Produces graphics, slides, and branding using tools like Canva or Figma.</span></span>
+                        </label>
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Technical &amp; Workshops">
+                            <span class="role-text"><strong>Technical &amp; Workshops</strong><span>Designs and delivers hands on AWS sessions and certification study groups.</span></span>
+                        </label>
+                        <label class="role-item">
+                            <input type="checkbox" name="roles" value="Partnerships &amp; Sponsorship">
+                            <span class="role-text"><strong>Partnerships &amp; Sponsorship</strong><span>Reaches out to companies and societies for speakers, sponsorship, and collaborations.</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your first choice role <span class="required">*</span></label>
+                    <select name="firstChoice" required>
+                        <option value="" disabled selected>Select your top preference</option>
+                        <option>Vice Lead</option>
+                        <option>Events &amp; Operations</option>
+                        <option>Marketing &amp; Social Media</option>
+                        <option>Design &amp; Creative</option>
+                        <option>Technical &amp; Workshops</option>
+                        <option>Partnerships &amp; Sponsorship</option>
+                        <option>Open to any role</option>
+                    </select>
+                </div>
+
+                <div class="section-title">Your application</div>
+
+                <div class="form-group">
+                    <label>Briefly introduce yourself <span class="required">*</span></label>
+                    <textarea name="introduction" required placeholder="Your interests, what you are studying, and anything that gives us a sense of you."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Why do you want to join the core team? <span class="required">*</span></label>
+                    <textarea name="motivation" required placeholder="Your motivation and what you hope to get out of it."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Why are you a good fit for your chosen role or roles? <span class="required">*</span></label>
+                    <textarea name="fit" required placeholder="Relevant skills, experience, or examples of things you have made or run."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Have you been part of a club, society, community, or project before? <span class="required">*</span></label>
+                    <textarea name="experience" required placeholder="Tell us about it, or write 'No, this would be my first' if not."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Your experience with AWS or cloud, and any certifications <span class="hint">(optional)</span></label>
+                    <textarea name="awsExperience" placeholder="Optional. Not required for non technical roles."></textarea>
+                </div>
+
+                <div class="section-title">Commitment</div>
+
+                <div class="form-group">
+                    <label>How many hours per week can you realistically commit? <span class="required">*</span></label>
+                    <select name="hours" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option>1 to 2 hours</option>
+                        <option>3 to 4 hours</option>
+                        <option>5 or more hours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Can you attend a core team meeting roughly once a fortnight? <span class="required">*</span></label>
+                    <select name="meetings" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>Depends on timing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Anything else you would like us to know? <span class="hint">(optional)</span></label>
+                    <textarea name="anythingElse" placeholder="Optional."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="consent">
+                        <input type="checkbox" name="consent" required>
+                        <span>I understand this is a voluntary, student led role, and I am happy for the details I provide to be used only for reviewing this application. <span class="required">*</span></span>
+                    </label>
+                </div>
+
+                <div class="error-banner" id="error-banner"></div>
+                <button type="submit" class="submit-btn" id="submit-btn">Submit application</button>
+            </form>
+
+            <div class="success-message" id="success-message">
+                <h3>Application received</h3>
+                <p>Thanks for applying to the AWS Student Builder Group core team. We will be in touch soon.</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Questions: <a href="mailto:n1451545@my.ntu.ac.uk">n1451545@my.ntu.ac.uk</a>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // CONFIG: paste your submission endpoint here. See README.md.
+        //   - Formspree (easiest):  https://formspree.io/f/XXXXXXXX
+        //   - AWS API Gateway:      https://xxxx.execute-api.<region>.amazonaws.com/prod
+        // ============================================================
+        const SUBMIT_ENDPOINT = "https://formspree.io/f/xqeoodbv";
+
+        const form = document.getElementById('application-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorBanner = document.getElementById('error-banner');
+        const successMessage = document.getElementById('success-message');
+
+        function showError(message) {
+            errorBanner.textContent = message;
+            errorBanner.style.display = 'block';
+            errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            errorBanner.style.display = 'none';
+
+            // Native validation for required fields
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // At least one role must be selected
+            const checkedRoles = Array.from(form.querySelectorAll('input[name="roles"]:checked')).map(c => c.value);
+            if (checkedRoles.length === 0) {
+                showError('Please select at least one role.');
+                return;
+            }
+
+            // Guard against an unconfigured endpoint
+            if (SUBMIT_ENDPOINT.includes('YOUR_FORM_ID')) {
+                showError('This form has not been connected to a backend yet. See README.md to add your submission endpoint.');
+                return;
+            }
+
+            const data = {
+                fullName: form.fullName.value.trim(),
+                email: form.email.value.trim(),
+                course: form.course.value.trim(),
+                phone: form.phone.value.trim(),
+                linkedin: form.linkedin.value.trim(),
+                github: form.github.value.trim(),
+                roles: checkedRoles,
+                firstChoice: form.firstChoice.value,
+                introduction: form.introduction.value.trim(),
+                motivation: form.motivation.value.trim(),
+                fit: form.fit.value.trim(),
+                experience: form.experience.value.trim(),
+                awsExperience: form.awsExperience.value.trim(),
+                hours: form.hours.value,
+                meetings: form.meetings.value,
+                anythingElse: form.anythingElse.value.trim(),
+                submittedAt: new Date().toISOString()
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch(SUBMIT_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit application';
+                    showError('Something went wrong while sending your application. Please try again in a moment.');
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit application';
+                showError('Connection problem. Please check your internet and try again.');
+            }
+        });
+    </script>
+</body>
+</html>
