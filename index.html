@@ -433,30 +433,24 @@
                 submittedAt: new Date().toISOString()
             };
 
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
+            // Show the confirmation straight away so the form feels instant,
+            // then send in the background. If the send fails, bring the form back.
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-            try {
-                const response = await fetch(SUBMIT_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    form.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit application';
-                    showError('Something went wrong while sending your application. Please try again in a moment.');
-                }
-            } catch (err) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit application';
-                showError('Connection problem. Please check your internet and try again.');
-            }
+            fetch(SUBMIT_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(data),
+                keepalive: true
+            }).then(function (response) {
+                if (!response.ok) { throw new Error('Submission rejected'); }
+            }).catch(function () {
+                successMessage.style.display = 'none';
+                form.style.display = 'block';
+                showError('Your application did not send. Please check your connection and submit again.');
+            });
         });
     </script>
 </body>
